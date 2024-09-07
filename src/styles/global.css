@@ -1,4 +1,7 @@
-@import "./font.css" @tailwind base;
+@import "./font.css";
+@import "./prose.css";
+
+@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
@@ -36,7 +39,11 @@ code {
     monospace;
 }
 
-@layer utilities {
+@layer components {
+  
+}
+
+@layer typography {
   .h0 {
     @apply font-kanit font-medium text-3xl xl:text-5xl;
   }
