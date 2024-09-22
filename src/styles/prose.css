@@ -1,6 +1,6 @@
 @layer components {
 	.prose {
-		@apply body mx-auto w-full max-w-prose tracking-wide text-astro-gray-200 lg:text-lg;
+		@apply mx-auto w-full max-w-prose tracking-wide text-gray-200 lg:text-lg;
 		line-height: 1.75em;
 	}
 
@@ -9,15 +9,15 @@
 	}
 
 	.prose > hr {
-		@apply my-8 border-astro-gray-500;
+		@apply my-8 border-gray-500;
 	}
 
 	.prose > h2 {
-		@apply font-heading heading-2 mb-4 mt-10 text-[32px] font-normal leading-[38px] text-white;
+		@apply mb-4 mt-10 text-[32px] font-normal leading-[38px] text-white;
 	}
 
 	.prose > h3 {
-		@apply font-heading heading-3 mb-4 mt-10 text-2xl font-normal leading-tight text-white;
+		@apply mb-4 mt-10 text-2xl font-normal leading-tight text-white;
 	}
 
 	.prose > img {
@@ -47,7 +47,7 @@
 		@apply my-4 list-inside list-decimal pl-4;
 	}
 	.prose ol ::marker {
-		@apply font-mono inline-block font-bold text-astro-pink-light;
+		@apply font-mono inline-block font-bold;
 	}
 
 	.prose li {
@@ -55,11 +55,11 @@
 	}
 
 	.prose :where(a) {
-		@apply text-astro-pink-light underline underline-offset-2 hover:no-underline;
+		@apply underline underline-offset-2 hover:no-underline;
 	}
 
 	.prose > p code {
-		@apply mx-0.5 inline-block rounded-lg bg-astro-gray-500 px-2 align-baseline text-sm leading-6 text-astro-gray-100;
+		@apply mx-0.5 inline-block rounded-lg bg-gray-500 px-2 align-baseline text-sm leading-6 text-gray-100;
 	}
 
 	.prose > p a > code {
@@ -68,7 +68,7 @@
 	}
 
 	.prose > .expressive-code pre {
-		@apply my-6 rounded-md border border-astro-gray-400;
+		@apply my-6 rounded-md border border-gray-400;
 	}
 
 	.prose table {
@@ -78,7 +78,7 @@
 		@apply w-full;
 	}
 	.prose :is(th, td) {
-		@apply border-b border-astro-gray-500 py-2 px-4 align-baseline;
+		@apply border-b border-gray-500 py-2 px-4 align-baseline;
 	}
 	.prose :is(th, td):first-child {
 		@apply pl-0;

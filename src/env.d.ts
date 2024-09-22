@@ -3,6 +3,7 @@
 interface ImportMetaEnv {
     readonly ENVRONMENT: string;
     readonly PUBLIC_CMS_ENDPOINT: string;
+    readonly PUBLIC_CMS_TOKEN: string;
     // more env variables...
   }
   

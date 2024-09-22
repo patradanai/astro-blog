@@ -1,7 +1,7 @@
 // RequestInit omit body
 type Options = Omit<RequestInit, 'body'>;
 
-class BaseHttp {
+export class BaseHttp {
 	private baseUrl = '';
 	private options: Options = {};
 
@@ -25,7 +25,12 @@ class BaseHttp {
 			...this.options,
 			method: 'POST',
 			body: JSON.stringify(data),
-		}).then((res) => res.json());
+		}).then((res) => {
+			if (res.ok) {
+				return res.json();
+			}
+			throw new Error("Something went wrong");
+		});
 	}
 
 	async put(url: string, data: any) {

@@ -1,8 +1,10 @@
-abstract class ExampleRepository {
+import { BaseHttp } from './baseHttp';
+
+export abstract class ExampleRepository {
 	abstract getExample(): Promise<any>;
 }
 
-class ExampleRepositoryImpl extends BaseHttp implements ExampleRepository {
+export class ExampleRepositoryImpl extends BaseHttp implements ExampleRepository {
 	constructor() {
 		super('');
 	}

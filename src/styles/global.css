@@ -7,8 +7,7 @@
 
 :root {
   --color-primary: #0747a6;
-  --color-secondary: #e1e1ef;
-  --tw-color-blue: 0, 123, 255;
+  --color-secondary: #FFDD00FF;
 
   --accent: 136, 58, 234;
   --accent-light: 224, 204, 250;
@@ -23,7 +22,7 @@
 
 html {
   font-family: "Kanit", sans-serif;
-  background: #000000;
+  background: #FFFFFF91;
 }
 
 code {

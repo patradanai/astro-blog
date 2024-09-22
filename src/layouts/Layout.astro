@@ -1,26 +1,42 @@
 ---
-import '../styles/global.css'
+import { ViewTransitions } from 'astro:transitions';
+import Footer from './Footer.astro';
+import Header from './Header.astro';
+import Sidebar from './Sidebar.astro';
+
+import '../styles/global.css';
 
 interface Props {
-    title: string
+	title: string;
 }
 
-const { title } = Astro.props
+const { title } = Astro.props;
 ---
 
 <!doctype html>
 <html lang='en'>
-    <head>
-        <meta charset='UTF-8' />
-        <meta name='description' content='Astro description' />
-        <meta name='viewport' content='width=device-width' />
-        <link rel='icon' type='image/svg+xml' href='/favicon.svg' />
-        <link rel='sitemap' href='/sitemap-index.xml' />
-        <meta name='generator' content={Astro.generator} />
-        <slot name='head' />
-        <title>{title}</title>
-    </head>
-    <body>
-        <slot />
-    </body>
+	<head>
+		<meta charset='UTF-8' />
+		<meta name='description' content='Astro description' />
+		<meta name='viewport' content='width=device-width' />
+		<link rel='icon' type='image/svg+xml' href='/favicon.svg' />
+		<link rel='sitemap' href='/sitemap-index.xml' />
+		<meta name='generator' content={Astro.generator} />
+		<slot name='head' />
+		<ViewTransitions />
+	</head>
+	<body>
+		<div class='flex flex-col'>
+			<Header />
+			<div class='flex grow size-full flex-row'>
+				<!-- <Sidebar /> -->
+				<div class='relative flex w-full min-h-screen'>
+					<main class='size-full'>
+						<slot />
+					</main>
+				</div>
+			</div>
+			<Footer />
+		</div>
+	</body>
 </html>
