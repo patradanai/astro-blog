@@ -8,12 +8,12 @@ export class BaseHttp {
 	constructor(baseUrl: string, options: Options = {}) {
 		this.baseUrl = baseUrl;
 		this.options = {
-            headers: {
-                'Content-Type': 'application/json',
-                'accept': 'application/json',
-            },
-            ...options
-        };
+			headers: {
+				'Content-Type': 'application/json',
+				accept: 'application/json',
+			},
+			...options,
+		};
 	}
 
 	async get(url: string) {
@@ -29,7 +29,7 @@ export class BaseHttp {
 			if (res.ok) {
 				return res.json();
 			}
-			throw new Error("Something went wrong");
+			throw new Error('Something went wrong');
 		});
 	}
 

@@ -1,0 +1,122 @@
+---
+import { AstroSeo } from '@astrolib/seo';
+import Button from '@src/components/Button/Button';
+import MarkdownRender from '@src/components/Markdown/Markdown.astro';
+import NextButton from '@src/components/Button/NextButton.astro';
+import Layout from '@src/layouts/Layout.astro';
+import { hygraphService } from '@src/services/hygraphService';
+
+import { Picture } from 'astro:assets';
+import { Icon } from 'astro-icon/components';
+import PreviousButton from '@src/components/Button/PreviousButton.astro';
+import ButtonShare from '@src/components/Button/ButtonShare';
+import { serializeMarkdown } from '@src/utils/markdownRender';
+import CardTableGenerateFloating from '@src/components/Card/CardTableGenerateFloating';
+
+const { slug } = Astro.params;
+
+if (!slug) {
+	return Astro.redirect('/404');
+}
+
+// Call API to get data by slug
+const { data } = await hygraphService().getBlogBySlug(slug);
+
+const { contentRender, toc } = await serializeMarkdown(data.blog.content);
+---
+
+<Layout title={data.blog.title}>
+	<AstroSeo
+		slot='head'
+		title={data.blog.title}
+		description={data.blog.description}
+		nofollow={data.blog.metaDescription.isFollow}
+		noindex={data.blog.metaDescription.isIndex}
+		openGraph={{
+			type: data.blog.metaDescription.ogType,
+			title: data.blog.metaDescription.metaTitle,
+			description: data.blog.metaDescription.metaDescription,
+			images: [{ url: data.blog.metaDescription.ogImage.url }],
+		}}
+	/>
+	<CardTableGenerateFloating client:only='react' />
+
+	<article class='py-5' transition:name=`media-page-${slug}` transition:animate='slide'>
+		<div class='container mx-auto max-w-6xl'>
+			<section class='flex h-full flex-col items-center rounded-2xl bg-[#EAEAEA]'>
+				<section class='py-10'>
+					<h1 class='text-center text-3xl font-bold'>{data.blog.title}</h1>
+				</section>
+
+				<!-- Image -->
+				<section class='px-5 py-10'>
+					<Picture
+						class='max-h-[600px] rounded-xl object-cover'
+						formats={['avif', 'webp']}
+						src={data.blog.desktopImage.url}
+						alt={''}
+						width='1924'
+						height='400'
+						loading='eager'
+						fetchpriority='high'
+						densities={[1.5, 2]}
+					/>
+				</section>
+
+				<!-- Icon -->
+				<section class='flex w-full flex-col items-end px-5'>
+					<ul class='flex gap-2'>
+						<li>
+							<ButtonShare client:only='react'>
+								<Icon name='mdi:link-variant' class='h-10 w-10 text-black' />
+							</ButtonShare>
+						</li>
+						<li>
+							<ButtonShare client:only='react'>
+								<Icon name='mdi:facebook' class='h-10 w-10 text-black' />
+							</ButtonShare>
+						</li>
+					</ul>
+				</section>
+
+				<!-- Content -->
+				<section class='mb-20 flex w-full flex-col items-center justify-start'>
+					<div class='prose prose-stone max-w-none p-4 md:mt-4 md:rounded-2xl'>
+						<MarkdownRender content={contentRender} />
+					</div>
+				</section>
+
+				<!-- Category -->
+				<section class='mb-10 w-full items-center justify-start px-5 *:flex'>
+					{
+						data.blog.category.map((v) => (
+							<Button
+								classBtn='h-10 w-fit min-w-32 rounded-full border-2 border-gray-500 bg-gray-300 text-xs text-black hover:border-gray-500 hover:bg-gray-300 hover:shadow-none'
+								type='button'
+							>
+								{v.name}
+							</Button>
+						))
+					}
+				</section>
+
+				<!-- Next - Previous -->
+				<section class='flex w-full flex-row justify-between px-5'>
+					<!-- Previous Btn -->
+					<PreviousButton />
+					<!-- Next Btn -->
+					<NextButton />
+				</section>
+
+				<!-- Writter -->
+				<section>
+					<div class='items-left flex flex-col'>
+						<div class='items-left flex flex-col'>
+							<p class='mt-5 text-lg font-bold'>{'sdfsd'}</p>
+						</div>
+					</div>
+				</section>
+			</section>
+		</div>
+	</article>
+</Layout>

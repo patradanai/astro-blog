@@ -6,22 +6,53 @@ import sitemap from '@astrojs/sitemap';
 
 import icon from 'astro-icon';
 
+import react from '@astrojs/react';
+
+import remarkToc from 'remark-toc';
+import rehypeToc from 'rehype-toc';
+import rehypeSlug from 'rehype-slug';
+import rehypeAutoLinkHeading from 'rehype-autolink-headings';
+
+import { rehypeHeadingIds } from '@astrojs/markdown-remark';
+
 // https://astro.build/config
 export default defineConfig({
 	site: 'https://patradanai.com',
 	output: 'server',
 	adapter: vercel(),
+	vite: {
+		ssr: {
+			noExternal: ['react-icons'],
+		},
+	},
 	integrations: [
 		tailwind({
 			applyBaseStyles: false,
 		}),
 		sitemap(),
 		icon(),
+		react({
+			experimentalReactChildren: true,
+		}),
 	],
 	markdown: {
-		rehypePlugins: [],
-		remarkPlugins: [],
-		syntaxHighlight: "prism",
+		rehypePlugins: [
+			rehypeSlug,
+			rehypeHeadingIds,
+			[rehypeToc, { headings: ['h1', 'h2'] }],
+			rehypeAutoLinkHeading,
+		],
+		remarkPlugins: [
+			[
+				remarkToc,
+				{
+					tight: true,
+					maxDepth: 3,
+				},
+			],
+		],
+		syntaxHighlight: 'prism',
 		gfm: true,
-	}
+		smartypants: true,
+	},
 });

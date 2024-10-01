@@ -5,7 +5,7 @@ import { HyGraphRepositoryImpl, type HyGraphRepository } from './hygraphReposito
 
 interface Reposities {
 	example: ExampleRepository;
-	hygraph: HyGraphRepository
+	hygraph: HyGraphRepository;
 }
 
 class BaseRepostiory {

@@ -1,0 +1,42 @@
+---
+import { Picture } from 'astro:assets';
+
+interface Props {}
+
+const {} = Astro.props;
+---
+
+<div class='mx-auto max-w-6xl'>
+	<div class='grid grid-cols-1 gap-8 md:grid-cols-2'>
+		<a>
+			<Picture
+				class='rounded-2xl'
+				alt='test'
+				formats={['avif', 'webp']}
+				src={'https://ap-northeast-1.graphassets.com/cm0sx4t8007ej0815e1xw960p/cm0tsccpx701w0710qv1c5cx4'}
+				densities={[1.5, 2]}
+				loading='eager'
+				decoding='async'
+				fetchpriority='high'
+				width={900}
+				height={540}
+			/>
+		</a>
+		<div class='flex flex-col justify-center'>
+			<p class='text-base uppercase text-primary md:text-lg'>FEATURE</p>
+			<a>
+				<h2 class='mb-1 text-xl font-bold md:text-3xl'>
+					The Postman VS Code Extension Is Finally Here!
+				</h2>
+			</a>
+			<p class='mb-4 line-clamp-1 text-base opacity-80 md:text-lg'>
+				Postman has officially launched a VS Code extension.
+			</p>
+			<div class='flex justify-between'>
+				<p class='text-base md:text-xl'>Sep 14, 2023</p>
+
+				<a class='text-base underline md:text-lg'> Read More </a>
+			</div>
+		</div>
+	</div>
+</div>

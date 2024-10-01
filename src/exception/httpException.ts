@@ -15,7 +15,7 @@ class HttpException extends Error {
 		return this.message;
 	}
 
-    public getStack() {
-        return this.stack;
-    }
+	public getStack() {
+		return this.stack;
+	}
 }

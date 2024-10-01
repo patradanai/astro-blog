@@ -11,7 +11,7 @@ export const CacheMiddleware = defineMiddleware(async (context, next) => {
 	const key = context.url.pathname;
 
 	let ttl: number = 0; // 1 minute
-	
+
 	context.locals.cache = (time: number = 0) => {
 		ttl = time;
 	};

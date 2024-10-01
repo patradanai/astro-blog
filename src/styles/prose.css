@@ -47,7 +47,7 @@
 		@apply my-4 list-inside list-decimal pl-4;
 	}
 	.prose ol ::marker {
-		@apply font-mono inline-block font-bold;
+		@apply inline-block font-mono font-bold;
 	}
 
 	.prose li {
@@ -72,13 +72,13 @@
 	}
 
 	.prose table {
-		@apply overflow-auto border-spacing-0 text-sm sm:text-base w-full;
+		@apply w-full border-spacing-0 overflow-auto text-sm sm:text-base;
 	}
 	.prose tr {
 		@apply w-full;
 	}
 	.prose :is(th, td) {
-		@apply border-b border-gray-500 py-2 px-4 align-baseline;
+		@apply border-b border-gray-500 px-4 py-2 align-baseline;
 	}
 	.prose :is(th, td):first-child {
 		@apply pl-0;
@@ -87,7 +87,7 @@
 		@apply pr-0;
 	}
 	.prose th {
-		@apply text-white font-medium;
+		@apply font-medium text-white;
 	}
 	.prose th:not([align]) {
 		@apply text-start;
