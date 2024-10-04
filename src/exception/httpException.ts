@@ -1,4 +1,4 @@
-class HttpException extends Error {
+export class HttpException extends Error {
 	private code: number;
 
 	constructor(code: number, message: string) {

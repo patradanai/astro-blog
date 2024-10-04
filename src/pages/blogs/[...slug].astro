@@ -39,7 +39,7 @@ const { contentRender, toc } = await serializeMarkdown(data.blog.content);
 			images: [{ url: data.blog.metaDescription.ogImage.url }],
 		}}
 	/>
-	<CardTableGenerateFloating client:only='react' />
+	<CardTableGenerateFloating client:only='react' headers={toc} />
 
 	<article class='py-5' transition:name=`media-page-${slug}` transition:animate='slide'>
 		<div class='container mx-auto max-w-6xl'>
@@ -81,7 +81,7 @@ const { contentRender, toc } = await serializeMarkdown(data.blog.content);
 
 				<!-- Content -->
 				<section class='mb-20 flex w-full flex-col items-center justify-start'>
-					<div class='prose prose-stone max-w-none p-4 md:mt-4 md:rounded-2xl'>
+					<div class='prose prose-stone prose-headings:text-black max-w-none p-4 md:mt-4 md:rounded-2xl'>
 						<MarkdownRender content={contentRender} />
 					</div>
 				</section>
@@ -101,18 +101,40 @@ const { contentRender, toc } = await serializeMarkdown(data.blog.content);
 				</section>
 
 				<!-- Next - Previous -->
-				<section class='flex w-full flex-row justify-between px-5'>
+				<section class='flex w-full flex-row justify-between px-5 mb-10'>
 					<!-- Previous Btn -->
 					<PreviousButton />
 					<!-- Next Btn -->
 					<NextButton />
 				</section>
 
+				<hr class='w-full border-2 border-black/80' />
+
 				<!-- Writter -->
-				<section>
-					<div class='items-left flex flex-col'>
-						<div class='items-left flex flex-col'>
-							<p class='mt-5 text-lg font-bold'>{'sdfsd'}</p>
+				<section class='w-full px-5 py-10'>
+
+					<div class='flex flex-col items-start'>
+						<div class=''>
+							<div class='size-28 overflow-hidden rounded-full'>
+								<Picture
+									class='max-h-full object-cover'
+									alt='patradanai'
+									src='/p.webp'
+									width={100}
+									height={100}
+									formats={['avif', 'webp']}
+								/>
+							</div>
+
+							<div class='items-left flex flex-col'>
+								<p class='mt-5 text-lg'>Writter By <span>{'sdfsd'}</span></p>
+							</div>
+
+							<div>
+								<p class='mt-5 text-lg'>
+									{'Frontend Developer ผู้ใฝ่ฝันอยากทำร้านขนมปัง'}
+								</p>
+							</div>
 						</div>
 					</div>
 				</section>

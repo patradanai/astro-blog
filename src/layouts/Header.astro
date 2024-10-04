@@ -1,25 +1,36 @@
 ---
-
+import { Picture } from 'astro:assets';
 ---
 
 <nav class='sticky top-0 z-50'>
-	<div class='flex h-[69px] justify-between bg-white px-10 py-5 shadow-md'>
-		<a href='/'> Logo </a>
+	<div class='relative bg-white shadow-md'>
+		<div class='container mx-auto'>
+			<div class='h-[69px] px-1 py-5 flex justify-between'>
+				<a href='/'>
+					<Picture
+						class='max-h-full object-contain'
+						alt='patrandanai'
+						src='/p.webp'
+						width={200}
+						height={150}
+						formats={['avif', 'webp']}
+					/>
+				</a>
 
-		<div>
-			<ul class='flex gap-5'>
-				<li>
-					<a href='/'>Doc</a>
-				</li>
-				<li>
-					<a href='/about'>Blog</a>
-				</li>
-				<li>
-					<a href='/contact'>Changelog</a>
-				</li>
-			</ul>
+				<div>
+					<ul class='flex gap-5'>
+						<li>
+							<a href='/'>Doc</a>
+						</li>
+						<li>
+							<a href='/about'>Blog</a>
+						</li>
+						<li>
+							<a href='/contact'>Changelog</a>
+						</li>
+					</ul>
+				</div>
+			</div>
 		</div>
-
-		<div></div>
 	</div>
 </nav>

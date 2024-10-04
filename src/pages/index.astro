@@ -9,9 +9,10 @@ import Button from '@src/components/Button/Button';
 
 const { data } = await hygraphService().getBlogs();
 
+console.log(data);
+
 const categorys = ['system design', 'web development', 'data structure', 'algorithm'];
 
-const {} = Astro.params;
 // Astro.locals.cache(0);
 ---
 
@@ -20,7 +21,18 @@ const {} = Astro.params;
 	<article class='container mx-auto max-w-6xl' transition:animate='slide'>
 		<div class='px-2 py-10 md:py-20'>
 			<section class='md:px-5'>
-				<CardLarge />
+				{
+					data.pinBlog.length > 0 ? (
+						<CardLarge
+							alt={data.pinBlog[0].title}
+							desc={data.pinBlog[0].description}
+							srcImage={data.pinBlog[0].desktopImage.url}
+							title={data.pinBlog[0].title}
+							datetime={data.pinBlog[0].publishedAt}
+							href={`/blogs/${data.pinBlog[0].slug}`}
+						/>
+					) : null
+				}
 			</section>
 			<section class='py-10 md:px-5'>
 				<p class='mb-20 text-3xl font-bold md:mb-5'>Latest Blogs</p>
@@ -63,7 +75,7 @@ const {} = Astro.params;
 				<div class='mt-10 flex justify-center'>
 					<a href='/blogs'>
 						<Button
-							classBtn='w-fit min-w-32 rounded-full text-sm'
+							classBtn='w-fit min-w-32 rounded-full text-sm bg-black hover:bg-gray-400'
 							color='primary'
 							variant='contained'
 							type='button'>Load More</Button

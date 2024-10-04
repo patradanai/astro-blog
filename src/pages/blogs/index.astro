@@ -6,7 +6,9 @@ import Card from '@src/components/Card/Card.astro';
 import { hygraphService } from '@src/services/hygraphService';
 import Button from '@src/components/Button/Button';
 
-const { data } = await hygraphService().getBlogs();
+const q = Astro.url.searchParams.get('q');
+
+const { data } = await hygraphService().getBlogs({ q: q ?? '' });
 
 const categorys = ['system design', 'web development', 'data structure', 'algorithm'];
 
@@ -16,8 +18,8 @@ const categorys = ['system design', 'web development', 'data structure', 'algori
 <Layout title='Blogs'>
 	<AstroSeo slot='head' title={'Blog'} description={'Blog'} />
 	<article class='container mx-auto max-w-6xl' transition:animate='slide'>
-		<div class='px-2 py-10 md:py-20'>
-			<section class='py-10 md:px-5'>
+		<div class='px-2 py-10'>
+			<section class='md:px-5'>
 				<p class='mb-20 text-3xl font-bold md:mb-5'>Latest Blogs</p>
 
 				<div class='mb-20 flex flex-wrap gap-3 md:mb-10'>

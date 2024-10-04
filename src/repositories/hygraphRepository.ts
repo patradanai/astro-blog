@@ -5,9 +5,10 @@ import GET_BLOGS from '@src/graphql/queries/blogs';
 import GET_BLOG from '@src/graphql/queries/blog';
 
 import { BaseHttp } from './baseHttp';
+import { HttpException } from '@src/exception/httpException';
 
 export abstract class HyGraphRepository {
-	abstract getBlogs(): Promise<WrapperGraphResponse<{ blogs: Blog.Response[] }>>;
+	abstract getBlogs(input?:{q: string}): Promise<WrapperGraphResponse<{ blogs: Blog.Response[], pinBlog: Blog.Response[] }>>;
 	abstract getBlogBySlug(slug: string): Promise<WrapperGraphResponse<{ blog: Blog.Response }>>;
 }
 
@@ -30,18 +31,20 @@ export class HyGraphRepositoryImpl extends BaseHttp implements HyGraphRepository
 				},
 			});
 		} catch (error) {
-			throw new HttpException(500, 'Internal  server error');
+			throw new HttpException(500, (error as Error)?.message ?? "Internal server error");
 		}
 	}
 
-	async getBlogs(): Promise<WrapperGraphResponse<{ blogs: Blog.Response[] }>> {
+	async getBlogs(input:{q : string, category: string}): Promise<WrapperGraphResponse<{ blogs: Blog.Response[], pinBlog: Blog.Response[] }>> {
 		try {
 			return this.post('', {
 				query: GET_BLOGS,
-				variables: {},
+				variables: {
+					q: input?.q ?? "",
+				},
 			});
 		} catch (error) {
-			throw new HttpException(500, 'Internal  server error');
+			throw new HttpException(500, (error as Error)?.message ?? "Internal server error");
 		}
 	}
 }

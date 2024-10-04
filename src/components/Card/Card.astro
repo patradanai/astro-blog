@@ -1,5 +1,5 @@
 ---
-import { Image, Picture } from 'astro:assets';
+import { Image } from 'astro:assets';
 import Button from '@src/components/Button/Button';
 import dayjs from 'dayjs';
 import { Icon } from 'astro-icon/components';
@@ -61,7 +61,7 @@ const { href, title, alt, desc, category, datetime, srcImage } = Astro.props;
 					</div>
 					<div class='hidden text-right md:block'>
 						<Button
-							classBtn='h-6 w-20 rounded-full text-xs'
+							classBtn='h-6 w-20 rounded-full text-xs bg-black hover:bg-gray-400'
 							size='sm'
 							variant='contained'
 							color='primary'>Read More</Button

@@ -1,19 +1,27 @@
 ---
 import { Picture } from 'astro:assets';
+import dayjs from 'dayjs';
 
-interface Props {}
+interface Props {
+	title: string;
+	alt: string;
+	desc: string;
+	datetime: string;
+	href: string;
+	srcImage: string;
+}
 
-const {} = Astro.props;
+const { title, alt, desc, datetime, href, srcImage }: Props = Astro.props;
 ---
 
 <div class='mx-auto max-w-6xl'>
 	<div class='grid grid-cols-1 gap-8 md:grid-cols-2'>
-		<a>
+		<a href={href}>
 			<Picture
 				class='rounded-2xl'
-				alt='test'
+				alt={alt}
 				formats={['avif', 'webp']}
-				src={'https://ap-northeast-1.graphassets.com/cm0sx4t8007ej0815e1xw960p/cm0tsccpx701w0710qv1c5cx4'}
+				src={srcImage}
 				densities={[1.5, 2]}
 				loading='eager'
 				decoding='async'
@@ -26,16 +34,16 @@ const {} = Astro.props;
 			<p class='text-base uppercase text-primary md:text-lg'>FEATURE</p>
 			<a>
 				<h2 class='mb-1 text-xl font-bold md:text-3xl'>
-					The Postman VS Code Extension Is Finally Here!
+					{title}
 				</h2>
 			</a>
 			<p class='mb-4 line-clamp-1 text-base opacity-80 md:text-lg'>
-				Postman has officially launched a VS Code extension.
+				{desc}
 			</p>
 			<div class='flex justify-between'>
-				<p class='text-base md:text-xl'>Sep 14, 2023</p>
+				<p class='text-base md:text-xl'>{dayjs(datetime).format('MMM DD, YYYY')}</p>
 
-				<a class='text-base underline md:text-lg'> Read More </a>
+				<a href={href} class='text-base underline md:text-lg'> Read More </a>
 			</div>
 		</div>
 	</div>
