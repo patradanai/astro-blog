@@ -9,11 +9,9 @@ import Button from '@src/components/Button/Button';
 
 const { data } = await hygraphService().getBlogs();
 
-console.log(data);
-
 const categorys = ['system design', 'web development', 'data structure', 'algorithm'];
 
-// Astro.locals.cache(0);
+Astro.locals.cache(60);
 ---
 
 <Layout title='Welcome to MyBlog'>

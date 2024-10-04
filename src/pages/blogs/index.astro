@@ -12,7 +12,7 @@ const { data } = await hygraphService().getBlogs({ q: q ?? '' });
 
 const categorys = ['system design', 'web development', 'data structure', 'algorithm'];
 
-// Astro.locals.cache(0);
+Astro.locals.cache(60);
 ---
 
 <Layout title='Blogs'>

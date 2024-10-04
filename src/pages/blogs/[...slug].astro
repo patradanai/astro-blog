@@ -23,6 +23,8 @@ if (!slug) {
 const { data } = await hygraphService().getBlogBySlug(slug);
 
 const { contentRender, toc } = await serializeMarkdown(data.blog.content);
+
+Astro.locals.cache(60);
 ---
 
 <Layout title={data.blog.title}>
