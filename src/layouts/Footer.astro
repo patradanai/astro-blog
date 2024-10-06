@@ -1,12 +1,22 @@
 ---
 import { Icon } from 'astro-icon/components';
+import { Picture } from 'astro:assets';
 ---
 
 <nav class='bg-black'>
 	<div class='container mx-auto'>
 		<div class='grid min-h-[400px] w-full grid-cols-1'>
-			<div class='flex flex-col items-center justify-center gap-10'>
-				<a href='/' class='text-2xl text-white'>Patradanai.com</a>
+			<div class='flex flex-col items-center justify-center gap-5'>
+				<a href='/' >
+					<Picture
+						class='h-full object-contain'
+						alt='patrandanai'
+						src='/logo_full_white.png'
+						width={300}
+						height={200}
+						formats={['avif', 'webp']}
+					/>
+				</a>
 				<p class=''>
 					<ul class='flex gap-5 text-blueGray-400'>
 						<li>
