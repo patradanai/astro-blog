@@ -29,7 +29,6 @@ export default defineConfig({
 		tailwind({
 			applyBaseStyles: false,
 		}),
-		sitemap(),
 		icon(),
 		react({
 			experimentalReactChildren: true,
