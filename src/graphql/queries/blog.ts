@@ -29,6 +29,16 @@ export default `
             }
             category {
                 name
+                blog(first: 2, orderBy: publishedAt_ASC) {
+                    slug
+                    title
+                    desktopImage {
+                        url
+                    }
+                    mobileImage {
+                        url
+                    }
+                }
             }
         }
     }

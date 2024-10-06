@@ -39,7 +39,6 @@ export default defineConfig({
 		rehypePlugins: [
 			rehypeSlug,
 			rehypeHeadingIds,
-			[rehypeToc, { headings: ['h1', 'h2'] }],
 			rehypeAutoLinkHeading,
 		],
 		remarkPlugins: [

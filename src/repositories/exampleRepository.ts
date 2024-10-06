@@ -1,4 +1,6 @@
 import { BaseHttp } from './baseHttp';
+import { HttpException } from '@src/exception/httpException';
+
 
 export abstract class ExampleRepository {
 	abstract getExample(): Promise<any>;

@@ -20,25 +20,25 @@ if (!slug) {
 }
 
 // Call API to get data by slug
-const { data } = await hygraphService().getBlogBySlug(slug);
+const data = await hygraphService().getBlogBySlug(slug);
 
-const { contentRender, toc } = await serializeMarkdown(data.blog.content);
+const { contentRender, toc } = await serializeMarkdown(data.content);
 
 Astro.locals.cache(60);
 ---
 
-<Layout title={data.blog.title}>
+<Layout title={data.title}>
 	<AstroSeo
 		slot='head'
-		title={data.blog.title}
-		description={data.blog.description}
-		nofollow={data.blog.metaDescription.isFollow}
-		noindex={data.blog.metaDescription.isIndex}
+		title={data.title}
+		description={data.description}
+		nofollow={data.metaDescription.isFollow}
+		noindex={data.metaDescription.isIndex}
 		openGraph={{
-			type: data.blog.metaDescription.ogType,
-			title: data.blog.metaDescription.metaTitle,
-			description: data.blog.metaDescription.metaDescription,
-			images: [{ url: data.blog.metaDescription.ogImage.url }],
+			type: data.metaDescription.ogType,
+			title: data.metaDescription.metaTitle,
+			description: data.metaDescription.metaDescription,
+			images: [{ url: data.metaDescription.ogImage.url }],
 		}}
 	/>
 	<CardTableGenerateFloating client:only='react' headers={toc} />
@@ -47,7 +47,7 @@ Astro.locals.cache(60);
 		<div class='container mx-auto max-w-6xl'>
 			<section class='flex h-full flex-col items-center rounded-2xl bg-[#EAEAEA]'>
 				<section class='py-10'>
-					<h1 class='text-center text-3xl font-bold'>{data.blog.title}</h1>
+					<h1 class='text-center text-3xl font-bold'>{data.title}</h1>
 				</section>
 
 				<!-- Image -->
@@ -55,7 +55,7 @@ Astro.locals.cache(60);
 					<Picture
 						class='max-h-[600px] rounded-xl object-cover'
 						formats={['avif', 'webp']}
-						src={data.blog.desktopImage.url}
+						src={data.desktopImage.url}
 						alt={''}
 						width='1924'
 						height='400'
@@ -83,7 +83,9 @@ Astro.locals.cache(60);
 
 				<!-- Content -->
 				<section class='mb-20 flex w-full flex-col items-center justify-start'>
-					<div class='prose prose-stone prose-headings:text-black max-w-none p-4 md:mt-4 md:rounded-2xl'>
+					<div
+						class='prose prose-stone max-w-none p-4 prose-headings:text-black md:mt-4 md:rounded-2xl'
+					>
 						<MarkdownRender content={contentRender} />
 					</div>
 				</section>
@@ -91,7 +93,7 @@ Astro.locals.cache(60);
 				<!-- Category -->
 				<section class='mb-10 w-full items-center justify-start px-5 *:flex'>
 					{
-						data.blog.category.map((v) => (
+						data.category.map((v) => (
 							<Button
 								classBtn='h-10 w-fit min-w-32 rounded-full border-2 border-gray-500 bg-gray-300 text-xs text-black hover:border-gray-500 hover:bg-gray-300 hover:shadow-none'
 								type='button'
@@ -103,18 +105,35 @@ Astro.locals.cache(60);
 				</section>
 
 				<!-- Next - Previous -->
-				<section class='flex w-full flex-row justify-between px-5 mb-10'>
+				<section class='mb-10 flex w-full flex-row justify-between px-5'>
 					<!-- Previous Btn -->
-					<PreviousButton />
+					{
+						data.relativeBlogs.length === 1 ? (
+							<PreviousButton
+								title={data.relativeBlogs[0].title}
+								imageAlt={data.relativeBlogs[0].imageAlt}
+								imageSrc={data.relativeBlogs[0].imageSrc}
+								path={`/blogs/${data.relativeBlogs[0].slug}`}
+							/>
+						) : <div />
+					}
 					<!-- Next Btn -->
-					<NextButton />
+					{
+						data.relativeBlogs.length === 2 ? (
+							<NextButton
+								title={data.relativeBlogs[1].title}
+								imageAlt={data.relativeBlogs[1].imageAlt}
+								imageSrc={data.relativeBlogs[1].imageSrc}
+								path={`/blogs/${data.relativeBlogs[1].slug}`}
+							/>
+						) : <div />
+					}
 				</section>
 
 				<hr class='w-full border-2 border-black/80' />
 
 				<!-- Writter -->
 				<section class='w-full px-5 py-10'>
-
 					<div class='flex flex-col items-start'>
 						<div class=''>
 							<div class='size-28 overflow-hidden rounded-full'>

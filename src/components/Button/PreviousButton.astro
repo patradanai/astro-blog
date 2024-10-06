@@ -1,20 +1,26 @@
 ---
 import { Picture } from 'astro:assets';
-interface Props {}
 
-const {} = Astro.props;
+interface Props {
+	title: string;
+	path: string;
+	imageSrc: string;
+	imageAlt: string;
+}
+
+const { title, imageAlt, imageSrc ,path} = Astro.props;
 ---
 
-<a href={'#'} class='group cursor-pointer'>
+<a href={path} class='group cursor-pointer'>
 	<div class='flex w-[400px] flex-row gap-3'>
 		<Picture
 			class='size-24 rounded-lg object-cover'
-			alt='test'
+			alt={imageAlt}
 			format='webp'
-			src={'https://ap-northeast-1.graphassets.com/cm0sx4t8007ej0815e1xw960p/cm0tsccpx701w0710qv1c5cx4'}
+			src={imageSrc}
 			width={100}
 			height={100}
-			loading='eager'
+			loading='lazy'
 			fetchpriority='high'
 		/>
 		<div class='flex w-2/3 flex-col justify-between py-3'>
@@ -22,9 +28,7 @@ const {} = Astro.props;
 				&lt; <span class='font-semibold text-blue-500'>Previous article</span>
 			</div>
 			<div class='line-clamp-2 text-lg'>
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio, quae culpa quis
-				perferendis magnam doloribus expedita ad dolore voluptate repellat vel praesentium nisi
-				aliquam ut earum ratione numquam pariatur id.
+				{ title }
 			</div>
 		</div>
 	</div>
