@@ -1,9 +1,9 @@
-import type { Blog } from '@src/types/blogs';
+import type { BlogRepository } from '@src/types/blogs';
 import type { WrapperGraphResponse } from '@src/types/http';
 import type { HyGraphRepository } from '../hygraphRepository';
 
 export class HygraphRepositoryImplMock implements HyGraphRepository {
-	getBlogBySlug(slug: string): Promise<WrapperGraphResponse<{ blog: Blog.Response }>> {
+	getBlogBySlug(slug: string): Promise<WrapperGraphResponse<{ blog: BlogRepository.Response }>> {
 		throw new Error('Method not implemented.');
 	}
 	getBlogs(): Promise<any> {
