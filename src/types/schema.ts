@@ -8,3 +8,18 @@ export type BlogSchema = {
     updatedDate?: Date  
     author?: string
 }
+
+export type ImageNode = {
+    key: string,
+    title: string,
+    technical: {
+      bodyMake: string,
+      bodyModel: string,
+      focalLength: string,
+      iso: string,
+      lensMake: string,
+      lensModel: string
+    },
+    url: string,
+    nodeIndex?: number
+  };

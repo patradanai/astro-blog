@@ -7,7 +7,7 @@ import Button from '@src/components/Button/Button';
 import type { OpenGraph } from '@src/types/headerTag';
 
 // Cache for 60 seconds
-Astro.locals.cache(60);
+Astro.locals.cache(import.meta.env.PUBLIC_CACHE_SITE);
 
 const { data } = await hygraphService().getBlogs();
 

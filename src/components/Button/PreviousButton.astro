@@ -12,9 +12,9 @@ const { title, imageAlt, imageSrc ,path} = Astro.props;
 ---
 
 <a href={path} class='group cursor-pointer'>
-	<div class='flex w-[400px] flex-row gap-3'>
+	<div class='flex md:w-[400px] flex-row gap-3'>
 		<Picture
-			class='size-24 rounded-lg object-cover'
+			class='hidden md:block size-24 rounded-lg object-cover'
 			alt={imageAlt}
 			format='webp'
 			src={imageSrc}
@@ -27,7 +27,7 @@ const { title, imageAlt, imageSrc ,path} = Astro.props;
 			<div class='flex gap-3'>
 				&lt; <span class='font-semibold text-blue-500'>Previous article</span>
 			</div>
-			<div class='line-clamp-2 text-lg'>
+			<div class='hidden md:block line-clamp-2 text-lg'>
 				{ title }
 			</div>
 		</div>

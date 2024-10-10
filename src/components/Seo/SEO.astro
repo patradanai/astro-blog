@@ -6,8 +6,8 @@ type Props = HeaderTag;
 
 const { title, description, og, noFollow = false, noIndex = false } = Astro.props;
 
-const DEFAULT_TITLE = import.meta.env.DEFAULT_TITLE as string;
-const DEFAULT_DESCRIPTION = import.meta.env.DEFAULT_DESCRIPTION as string;
+const DEFAULT_TITLE = import.meta.env.PUBLIC_DEFAULT_TITLE as string;
+const DEFAULT_DESCRIPTION = import.meta.env.PUBLIC_DEFAULT_DESCRIPTION as string;
 const BASE_URL = import.meta.env.PUBLIC_CMS_SITE as string;
 
 if (!BASE_URL) {

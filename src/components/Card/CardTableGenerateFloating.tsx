@@ -16,7 +16,7 @@ interface Props {
 }
 
 const CardTableGenerate: React.FC<Props> = ({ headers }) => {
-	const [isOpen, setIsOpen] = useState(true);
+	const [isOpen, setIsOpen] = useState(false);
     const [activeId] = useIntersection(headers ?? []);
 
 	return (
