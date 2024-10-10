@@ -1,5 +1,4 @@
 ---
-import { AstroSeo } from '@astrolib/seo';
 import Button from '@src/components/Button/Button';
 import MarkdownRender from '@src/components/Markdown/Markdown.astro';
 import NextButton from '@src/components/Button/NextButton.astro';
@@ -12,6 +11,11 @@ import PreviousButton from '@src/components/Button/PreviousButton.astro';
 import ButtonShare from '@src/components/Button/ButtonShare';
 import { serializeMarkdown } from '@src/utils/markdownRender';
 import CardTableGenerateFloating from '@src/components/Card/CardTableGenerateFloating';
+import type { OpenGraph } from '@src/types/headerTag';
+import { generateBlogSchema } from '@src/utils';
+
+// Cache for 60 seconds
+Astro.locals.cache(60);
 
 const { slug } = Astro.params;
 
@@ -24,23 +28,35 @@ const data = await hygraphService().getBlogBySlug(slug);
 
 const { contentRender, toc } = await serializeMarkdown(data.content);
 
-Astro.locals.cache(60);
+// OpenGraph
+const openGraph: OpenGraph = {
+	type: data.metaDescription.ogType,
+	title: data.metaDescription.metaTitle,
+	description: data.metaDescription.metaDescription,
+	image: data.metaDescription.ogImage.url,
+	alt: data.metaDescription.metaTitle,
+};
+
+// Schema
+const schema = generateBlogSchema({
+	title: data.title,
+	description: data.description,
+	url: Astro.url.pathname,
+	image: data.desktopImage.url,
+	author: 'Patradanai',
+	keywords: data.metaDescription.keyword,
+	publishedDate: new Date(data.publishedAt),
+});
 ---
 
-<Layout title={data.title}>
-	<AstroSeo
-		slot='head'
-		title={data.title}
-		description={data.description}
-		nofollow={data.metaDescription.isFollow}
-		noindex={data.metaDescription.isIndex}
-		openGraph={{
-			type: data.metaDescription.ogType,
-			title: data.metaDescription.metaTitle,
-			description: data.metaDescription.metaDescription,
-			images: [{ url: data.metaDescription.ogImage.url }],
-		}}
-	/>
+<Layout
+	title={data.title}
+	description={data.description}
+	noFollow={data.metaDescription.isFollow ? false : true}
+	noIndex={data.metaDescription.isIndex ? false : true}
+	og={openGraph}
+	schema={schema}
+>
 	<CardTableGenerateFloating client:only='react' headers={toc} />
 
 	<article class='py-5' transition:name=`media-page-${slug}` transition:animate='slide'>
@@ -115,7 +131,9 @@ Astro.locals.cache(60);
 								imageSrc={data.relativeBlogs[0].imageSrc}
 								path={`/blogs/${data.relativeBlogs[0].slug}`}
 							/>
-						) : <div />
+						) : (
+							<div />
+						)
 					}
 					<!-- Next Btn -->
 					{
@@ -126,7 +144,9 @@ Astro.locals.cache(60);
 								imageSrc={data.relativeBlogs[1].imageSrc}
 								path={`/blogs/${data.relativeBlogs[1].slug}`}
 							/>
-						) : <div />
+						) : (
+							<div />
+						)
 					}
 				</section>
 

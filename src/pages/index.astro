@@ -1,21 +1,33 @@
 ---
-import { AstroSeo } from '@astrolib/seo';
-
 import Layout from '@src/layouts/Layout.astro';
 import Card from '@src/components/Card/Card.astro';
 import { hygraphService } from '@src/services/hygraphService';
 import CardLarge from '@src/components/Card/CardLarge.astro';
 import Button from '@src/components/Button/Button';
+import type { OpenGraph } from '@src/types/headerTag';
+
+// Cache for 60 seconds
+Astro.locals.cache(60);
 
 const { data } = await hygraphService().getBlogs();
 
 const categorys = ['system design', 'web development', 'data structure', 'algorithm'];
 
-Astro.locals.cache(60);
+// OpenGraph
+const openGraph: OpenGraph = {
+	type: 'website',
+	title: 'patradanai.com',
+	description: 'A communtity for developers to keep learning and sharing knowledge.',
+	image: '/logo_full_white.png',
+	alt: 'patradanai.com',
+};
 ---
 
-<Layout title='Welcome to MyBlog'>
-	<AstroSeo slot='head' title={'Blog'} description={'Blog'} />
+<Layout
+	title='patradanai.com'
+	description='A communtity for developers to keep learning and sharing knowledge.'
+	og={openGraph}
+>
 	<article class='container mx-auto max-w-6xl' transition:animate='slide'>
 		<div class='px-2 py-10 md:py-20'>
 			<section class='md:px-5'>
@@ -73,7 +85,7 @@ Astro.locals.cache(60);
 				<div class='mt-10 flex justify-center'>
 					<a href='/blogs'>
 						<Button
-							classBtn='w-fit min-w-32 rounded-full text-sm bg-black hover:bg-gray-400'
+							classBtn='w-fit min-w-32 rounded-full bg-black text-sm hover:bg-gray-400'
 							color='primary'
 							variant='contained'
 							type='button'>Load More</Button
