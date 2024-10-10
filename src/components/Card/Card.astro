@@ -14,7 +14,7 @@ interface Props {
 	datetime: string;
 }
 
-const { href, title, alt, desc, category, datetime, srcImage } = Astro.props;
+const { href, title, alt, desc, datetime, srcImage } = Astro.props;
 ---
 
 <a href={href}>
@@ -54,7 +54,7 @@ const { href, title, alt, desc, category, datetime, srcImage } = Astro.props;
 					</div> -->
 					<div class='py-1'>
 						<p
-							class='line-clamp-2 h-[50px] text-sm leading-6 text-gray-500 md:line-clamp-3 md:h-[55px]'
+							class='line-clamp-4 md:line-clamp-2 h-[50px] text-sm leading-6 text-gray-500 md:line-clamp-3 md:h-[55px]'
 						>
 							{desc}
 						</p>
