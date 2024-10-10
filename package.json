@@ -3,10 +3,10 @@
 	"type": "module",
 	"version": "0.0.1",
 	"scripts": {
-		"dev": "astro dev --mode dev",
+		"dev": "astro dev --mode devevelopment",
 		"stub": "NODE_ENV=stub astro dev",
 		"start": "astro dev",
-		"build": "astro check && astro build",
+		"build": "astro check && astro build --mode production",
 		"preview": "astro preview",
 		"astro": "astro",
 		"test": "vitest",
