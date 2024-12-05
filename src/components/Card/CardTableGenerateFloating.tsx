@@ -21,11 +21,12 @@ const CardTableGenerate: React.FC<Props> = ({ headers }) => {
 
 	return (
 		<>
-			<div
-				className={`fixed top-1/2 z-50 -translate-y-1/2 transition-all ${isOpen ? 'right-2 delay-300' : '-right-[300px]'}`}
-			>
+		 <div
+                className={`ml-10 fixed top-1/2 z-50 -translate-y-1/2 transition-transform ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}
+                style={{ right: isOpen ? '2rem' : '-320px' }}
+            >
 				<div
-					className={`min-w-[280px] rounded-xl bg-[#EAEAEA] p-5 shadow-xl border-black border-2`}
+					className={`w-full md:min-w-[280px] rounded-xl bg-[#EAEAEA] p-5 shadow-xl border-black border-2`}
 				>
 					<div className='cursor-pointer bg-transparent' onClick={() => setIsOpen(false)}>
 						<MdOutlineKeyboardDoubleArrowRight className='w-6 h-6' />

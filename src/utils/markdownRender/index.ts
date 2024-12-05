@@ -17,17 +17,20 @@ export const serializeMarkdown = async (
 
 	const renderer: RendererObject = {
 		heading(args): string {
-			var anchor = args.text.toLowerCase().replace(/[^\w]+/g, '-');
+			// Only H2
+			if (args.depth === 2) {
+                const anchor = args.text.toLowerCase().replace(/[^\w]+/g, '-');
 
-			toc.push({
-				anchor: anchor,
-				level: args.depth,
-				text: args.text,
-			});
+                toc.push({
+                    anchor: anchor,
+                    level: args.depth,
+                    text: args.text,
+                });
+            }
 			const text = this.parser.parseInline(args.tokens);
 
 			return `
-                <h${args.depth} id="${anchor}">
+                <h${args.depth} id="${args.text.toLowerCase().replace(/[^\w]+/g, '-')}">
                   ${text}
                 </h${args.depth}>`;
 		},

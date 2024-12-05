@@ -35,6 +35,19 @@ export default {
 				warning: '#FBBF24',
 				error: '#EF4444',
 			},
+			typography: (theme) => ({
+				DEFAULT: {
+					css: {
+                        color: theme('colors.black'),
+                        h1: { color: theme('colors.red.600') },
+                        h2: { color: theme('colors.red.600') },
+                        h3: { color: theme('colors.black') },
+                        h4: { color: theme('colors.black') },
+                        h5: { color: theme('colors.black') },
+                        h6: { color: theme('colors.black') },
+                    },
+				},
+			  }),
 		},
 	},
 	plugins: [require('@tailwindcss/typography')],
