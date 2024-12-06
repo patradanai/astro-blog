@@ -34,6 +34,14 @@ export const serializeMarkdown = async (
                   ${text}
                 </h${args.depth}>`;
 		},
+    image({href, text, title}): string {
+      const imageTitle = title ? `<figcaption class="text-center">${title}</figcaption>` : '';
+			return `
+				<figure>
+					<img src="${href}" alt="${text}" />
+					${imageTitle}
+				</figure>`;
+      },
 	};
 
 	marked.use(
