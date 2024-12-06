@@ -19,7 +19,7 @@ export const serializeMarkdown = async (
 		heading(args): string {
 			// Only H2
 			if (args.depth === 2) {
-                const anchor = args.text.toLowerCase().replace(/[^\w]+/g, '-');
+                const anchor = args.text.toLowerCase().replace(/[^\p{L}\p{M}\d]+/gu, '-');
 
                 toc.push({
                     anchor: anchor,
@@ -30,7 +30,7 @@ export const serializeMarkdown = async (
 			const text = this.parser.parseInline(args.tokens);
 
 			return `
-                <h${args.depth} id="${args.text.toLowerCase().replace(/[^\w]+/g, '-')}">
+                <h${args.depth} id="${args.text.toLowerCase().replace(/[^\p{L}\p{M}\d]+/gu, '-')}">
                   ${text}
                 </h${args.depth}>`;
 		},
