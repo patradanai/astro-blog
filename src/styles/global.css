@@ -63,3 +63,74 @@ code {
 		@apply font-kanit text-sm md:text-base;
 	}
 }
+
+.code-block {
+    position: relative;
+	display: block;
+	margin-top: 0 !important;
+	border-radius: 10px 10px 0px 0px;
+	overflow: hidden;
+}
+
+.code-toolbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #3D3D3DFF;
+    border-bottom: 1px solid #ddd;
+    padding: 0.5rem 1.5rem;
+}
+
+.toolbar {
+    display: flex;
+    align-items: center;
+	height: 1.5rem;
+}
+
+.toolbar-item {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #ff5f56;
+    margin-right: 0.5rem;
+}
+
+.toolbar-item:nth-child(2) {
+    background-color: #ffbd2e;
+}
+
+.toolbar-item:nth-child(3) {
+    background-color: #27c93f;
+}
+
+.copy-button {
+    position: absolute;
+    top: 3rem;
+    right: 0.5rem;
+    background-color: #929292FF;
+    color: white;
+    border: none;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    display: flex;
+    align-items: center;
+}
+
+.code-block:hover .copy-button {
+    opacity: 1;
+}
+
+.copy-button:hover {
+    background-color: #0056b3;
+}
+
+.copy-button .icon {
+    margin-right: 0.25rem;
+}

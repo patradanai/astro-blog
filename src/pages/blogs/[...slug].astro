@@ -107,7 +107,7 @@ const schema = generateBlogSchema({
 				</section>
 
 				<!-- Category -->
-				<section class='mb-10 w-full items-center justify-start px-5 flex flex-wrap gap-5'>
+				<section class='mb-10 flex w-full flex-wrap items-center justify-start gap-5 px-5'>
 					{
 						data.category.map((v) => (
 							<Button
@@ -156,8 +156,10 @@ const schema = generateBlogSchema({
 				<section class='w-full px-5 py-10'>
 					<div class='flex flex-col items-start'>
 						<div class=''>
-							<div class='size-28 bg-gray-400 overflow-hidden rounded-full  grid place-content-center'>
-								<p class="uppercase text-black/80 text-6xl">P</p>
+							<div
+								class='grid size-28 place-content-center overflow-hidden rounded-full bg-gray-400'
+							>
+								<p class='text-6xl uppercase text-black/80'>P</p>
 							</div>
 
 							<div class='items-left flex flex-col'>
@@ -176,3 +178,24 @@ const schema = generateBlogSchema({
 		</div>
 	</article>
 </Layout>
+
+<script>
+	function copyCode(button: HTMLElement) {
+		const codeBlock = button.closest('.code-block')?.querySelector('code');
+		if (codeBlock) {
+			navigator.clipboard.writeText(codeBlock.textContent || '').then(() => {
+				button.textContent = 'Copied!';
+				setTimeout(() => {
+					button.textContent = '📋 Copy';
+				}, 2000);
+			});
+		}
+	}
+
+	document.addEventListener('click', (event) => {
+		const target = event.target as HTMLElement;
+		if (target.classList.contains('copy-button')) {
+			copyCode(target);
+		}
+	});
+</script>
