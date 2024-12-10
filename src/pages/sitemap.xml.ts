@@ -12,7 +12,7 @@ export async function GET() {
     ${data.blogs
       .map((post) => {
         const lastMod = (new Date(post.publishedAt)).toISOString();
-        return `<url><loc>${siteUrl}${post.slug}/</loc><lastmod>${lastMod}</lastmod></url>`;
+        return `<url><loc>${siteUrl}/${post.slug}/</loc><lastmod>${lastMod}</lastmod></url>`;
       })
       .join('\n')}  
   </urlset>  
